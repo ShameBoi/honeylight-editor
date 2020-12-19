@@ -1,0 +1,132 @@
+@import "settings";
+@import "mixins";
+
+.btn-toolbar.icon-toolbar {
+  @include coloredIcon(".icon-toolbar-btn.btn-default", $btn-default-color, $btn-default-bg);
+  @include coloredIcon(".icon-toolbar-btn.dropdown-toggle", $btn-default-color, transparent);
+  @include coloredIcon(".icon-toolbar-btn.btn-primary", $brand-primary, transparent);
+  @include coloredIcon(".icon-toolbar-btn.btn-info", $brand-info, transparent);
+  @include coloredIcon(".icon-toolbar-btn.btn-success", $brand-success, transparent);
+  @include coloredIcon(".icon-toolbar-btn.btn-warning", $brand-warning, transparent);
+  @include coloredIcon(".icon-toolbar-btn.btn-danger", $brand-danger, transparent);
+
+  flex: 0 0 auto;
+  text-align: right;
+  user-select: none;
+  vertical-align: middle;
+  white-space: nowrap;
+  margin: 0;
+  height: 100%;
+
+  .icon-toolbar-group {
+    flex: 0 0 auto;
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin: 0;
+    height: 100%;
+
+    > * {
+      border: 0;
+      border-right: 1px solid;
+      padding: 0.5em 0.75em;
+      height: 100%;
+
+      &:last-child {
+        border-right: 0;
+      }
+    }
+  }
+
+  .icon-toolbar-spacer {
+    flex: 1 1 auto;
+  }
+
+  > .dropdown.btn-group {
+    padding: 0;
+    margin: 0;
+  }
+
+  .dropdown-toggle {
+    padding: 0;
+  }
+
+  .icon-toolbar-btn {
+    align-items: center;
+    background-color: transparent;
+    border: 0;
+    border-radius: 0;
+    color: lighten($btn-default-color, 20%);
+    cursor: pointer;
+    display: none;
+    flex: 1 0 auto;
+    flex-flow: row nowrap;
+    justify-content: flex-start;
+    padding: 0.5em;
+
+    > .btn-icon {
+      flex: 0 0 auto;
+      line-height: 1em;
+    }
+
+    > .btn-text {
+      flex: 1 1 auto;
+      font-size: 1.5em;
+    }
+
+    &.dropdown-toggle {
+      display: flex;
+    }
+
+    &.btn-dropdown {
+      display: flex;
+
+      &.btn-always-iconified {
+        display: none;
+      }
+    }
+
+    @media #{$xs-only} {
+      &.btn-iconified {
+        display: none;
+
+        &.btn-always-iconified {
+          display: flex;
+        }
+      }
+    }
+
+    @media #{$sm-up} {
+      &.btn-iconified {
+        display: flex;
+
+        &.btn-never-iconified {
+          display: none;
+        }
+      }
+    }
+  }
+
+  .dropdown-menu {
+    border-radius: 0;
+    left: initial;
+    margin: 0;
+    min-width: 0;
+    padding: 0;
+    right: 0;
+
+    > .btn {
+      border: 0;
+      border-radius: 0;
+      text-align: left;
+      width: 100%;
+
+      &:hover,
+      &:active,
+      &:focus {
+        background-color: lighten($dropdown-bg, 5%);
+      }
+    }
+  }
+}

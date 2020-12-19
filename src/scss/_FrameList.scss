@@ -1,0 +1,179 @@
+@import "settings";
+@import "mixins";
+@import "bootstrap";
+
+.frameList {
+  flex: 1 1 (3em * 5);
+  width: 100%;
+  display: flex;
+  flex-flow: column nowrap;
+  overflow-y: scroll;
+
+  .frameListHeader {
+    flex: 0 0 auto;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    background-color: $frame-list-header-background;
+    color: $gray-light;
+
+    .frameListTitle {
+      flex: 1 1 auto;
+
+      h2 {
+        font-size: 1em;
+        margin: 0;
+      }
+    }
+
+    .frameListButtons {
+      flex: 0 0 auto;
+
+      button {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        border: none;
+        padding: 0.5em;
+      }
+
+      .frameListButtonIcon {
+        font-size: 1.1em;
+        width: 1em;
+        height: 1em;
+        line-height: 1em;
+      }
+    }
+  }
+
+  .frameListBody {
+    flex: 1 1 auto;
+    margin: 0;
+    overflow-y: scroll;
+  }
+
+  .frameListItem {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 0;
+    border: none;
+    color: $frame-list-text-color;
+    background-color: $frame-list-item-background;
+    cursor: pointer;
+    height: 3em;
+
+    > * {
+      margin: $frame-list-base-spacing ($frame-list-base-spacing / 2);
+
+      &:last-child {
+        margin-right: $frame-list-base-spacing;
+      }
+    }
+
+    &:nth-of-type(odd) {
+      background-color: lighten($frame-list-item-background, 5%);
+    }
+
+    &:focus,
+    &:hover {
+      color: $frame-list-text-color;
+      background-color: $frame-list-active-item-background;
+    }
+
+    &.active,
+    &.active:focus,
+    &.active:hover {
+      color: $frame-list-text-color;
+      background-color: $frame-list-active-item-background;
+      outline: none;
+    }
+
+    .frameListItemText {
+      flex: 0 1 2em;
+      width: 2em;
+    }
+
+    .frameListItemTransition {
+      flex: 0 0 2em;
+      width: 2em;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+
+      .frameListItemTransitionLabel {
+        margin: 0 ($frame-list-base-spacing / 2) 0 0;
+      }
+
+      .frameListItemTransitionCheckBox {
+        margin: 0;
+      }
+    }
+
+    .frameListItemThumbnailWrapper {
+      flex: 0 2 auto;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid $frame-list-base-border;
+      border-radius: 0.5em;
+
+      &.thumbnailLoading {
+        flex: 0 1 auto;
+        display: block;
+        border: none;
+        border-radius: 0;
+        font-size: 0.8em;
+        font-style: italic;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        text-align: left;
+      }
+    }
+
+    .frameListItemThumbnail {
+      width: 100%;
+      height: auto;
+    }
+
+    .frameListItemRemoveFrameButton {
+      height: 100%;
+      width: 3em;
+      font-size: 1em;
+      margin: 0 ($frame-list-base-spacing / 2) 0 0;
+      border: none;
+      border-radius: 0;
+    }
+
+    .frameListTransitionFrames {
+      flex: 0 0 3.5em;
+      height: 100%;
+      width: 3.5em;
+      margin-right: 0;
+    }
+
+    .frameListTransitionFramesInput {
+      width: 100%;
+      height: 100%;
+      padding: 0 ($frame-list-base-spacing / 2);
+      margin: 0;
+      font-family: $frame-list-input-font-family;
+      border: none;
+      border-radius: 0;
+      background-color: transparentize($gray-lighter, 0.5);
+      box-shadow: none;
+      text-align: center;
+
+      &:hover,
+      &:active {
+        box-shadow: none;
+      }
+    }
+  }
+}

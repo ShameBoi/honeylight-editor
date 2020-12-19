@@ -1,0 +1,71 @@
+{
+  "plugins": [
+    "import",
+    "flow",
+    "prettier",
+    "flowtype",
+    "react",
+    "jsx-a11y"
+  ],
+  "parser": "babel-eslint",
+  "parserOptions": {
+    "ecmaVersion": 7,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true,
+      "modules": true,
+      "classes": true,
+      "destructuring": true,
+      "forOf": true,
+      "blockBindings": true,
+      "arrowFunctions": true,
+      "generators": true
+    }
+  },
+  "globals": {
+  },
+  "env": {
+    "es6": true,
+    "browser": true,
+    "jest": true,
+    "node": true
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:flowtype/recommended",
+    "plugin:react/recommended",
+    "plugin:jsx-a11y/recommended",
+    "prettier",
+    "prettier/flowtype",
+    "prettier/react"
+  ],
+  "rules": {
+    "comma-dangle": 0,
+    "max-len": [2, 200, 2],
+    "new-cap": ["error", {"capIsNew": false}],
+    "no-unused-vars": [1, {
+      "varsIgnorePattern": "^(font|style)_"
+    }],
+    "no-empty": 1,
+    "no-console": 0,
+    "prettier/prettier": [
+      "error",
+      {
+        "trailingComma": "none",
+        "singleQuote": true,
+        "printWidth": 100
+      }
+    ],
+    "flowtype/boolean-style": [2, "boolean"]
+  },
+  "settings": {
+    "flowtype": {
+      "onlyFilesWithFlowAnnotation": true
+    },
+    "import/resolver": {
+      "webpack": {
+        "config": "./webpack.config.js"
+      }
+    }
+  }
+}

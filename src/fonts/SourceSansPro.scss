@@ -1,0 +1,6 @@
+@import "mixins";
+
+@include defineFont(".", "SourceSansPro", "Source Sans Pro", "Regular", normal, normal);
+@include defineFont(".", "SourceSansPro", "Source Sans Pro", "Bold", bold, normal);
+@include defineFont(".", "SourceSansPro", "Source Sans Pro", "Italic", normal, italic);
+@include defineFont(".", "SourceSansPro", "Source Sans Pro", "BoldItalic", bold, italic);

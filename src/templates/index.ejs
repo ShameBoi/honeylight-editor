@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charSet="UTF-8" />
+    <%= htmlWebpackPlugin.tags.headTags %>
+    <title><%= htmlWebpackPlugin.options.title %></title>
+    <%
+    htmlWebpackPlugin.files.js.forEach((entry, index) => {
+        if (htmlWebpackPlugin.options.cssOnlyChunks.some((chunkName) => entry.match(`.*/${chunkName}-.*`))) {
+          return;
+        }
+        %> <script defer type="text/javascript" src="<%= entry %>" <%
+        if (htmlWebpackPlugin.files.jsIntegrity) {
+        %> integrity="<%= htmlWebpackPlugin.files.jsIntegrity[index] %>" <%
+            %> crossorigin="<%= webpackConfig.output.crossOriginLoading %>"<%
+        }
+        %>></script><%
+    });
+    %>
+</head>
+<body>
+    <div id="root"></div>
+</body>
+</html>

@@ -1,0 +1,84 @@
+@import "settings";
+
+@mixin coloredIcon($className, $baseColor, $bgColor) {
+  #{$className},
+  .open #{$className} {
+    background-color: $bgColor;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    color: $baseColor;
+    text-shadow: 0 0 0.1em darken($baseColor, 25%);
+    transition: color 150ms, text-shadow 150ms, box-shadow 150ms;
+
+    &:hover,
+    &:active,
+    &:focus,
+    &:active:hover,
+    &:active:focus,
+    &:active:hover:focus {
+      background-color: lighten($bgColor, 5%);
+      border: 0;
+      border-radius: 0;
+      color: lighten($baseColor, 10%);
+    }
+
+    &.btn-iconified {
+      &:hover,
+      &:hover:focus {
+        box-shadow: 0 0 0.25em $gray-darker;
+      }
+
+      &:active,
+      &:active:hover,
+      &:active:focus,
+      &:active:hover:focus {
+        box-shadow: inset 0 0 0.5em $gray-darker;
+      }
+    }
+
+    &:disabled,
+    &[disabled],
+    &.disabled {
+      border: 0;
+      border-radius: 0;
+      color: $btn-link-disabled-color;
+      cursor: not-allowed;
+      text-shadow: none;
+
+      &:hover,
+      &:active,
+      &:focus,
+      &:active:hover,
+      &:active:focus,
+      &:active:hover:focus {
+        border: 0;
+        border-radius: 0;
+        box-shadow: none;
+        color: $btn-link-disabled-color;
+        cursor: not-allowed;
+        text-shadow: none;
+      }
+    }
+  }
+
+  .open #{$className}.btn-iconified {
+    box-shadow: inset 0 0 0.5em $gray-darker;
+  }
+}
+
+@mixin transitionGroup($startOrEnd, $groupName) {
+  @if $startOrEnd == start {
+    &.#{$groupName}-enter,
+    &.#{$groupName}-leave.#{$groupName}-leave-active {
+      @content;
+    }
+  }
+
+  @else if $startOrEnd == end {
+    &.#{$groupName}-enter.#{$groupName}-enter-active,
+    &.#{$groupName}-leave {
+      @content;
+    }
+  }
+}

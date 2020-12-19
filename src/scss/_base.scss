@@ -1,0 +1,53 @@
+@import "settings";
+
+a,
+button,
+.btn {
+  transition: background-color 150ms, color 150ms;
+
+  &.btn-danger {
+    font-weight: $btn-danger-font-weight;
+  }
+}
+
+body {
+  margin: 0;
+  background-color: $body-bg;
+  color: $text-color;
+  font-family: $font-family-base;
+}
+
+body,
+input,
+textarea,
+select,
+button,
+.btn {
+  letter-spacing: 0.1em;
+  outline: none;
+
+  &:focus,
+  &:active,
+  &:active:focus {
+    outline: none;
+  }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.navbar-brand {
+  font-family: $font-family-headings;
+  font-weight: bold;
+}
+
+.panel-heading {
+  text-shadow: 0 0 0.5em $gray-dark;
+}
+
+* {
+  box-sizing: border-box;
+}

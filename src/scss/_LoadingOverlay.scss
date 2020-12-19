@@ -1,0 +1,48 @@
+@import "settings";
+
+.loading-overlay-transition-enter {
+  opacity: 0;
+
+  &.loading-overlay-transition-enter-active {
+    opacity: 1;
+    transition: opacity 150ms ease-in-out;
+  }
+}
+
+.loading-overlay-transition-leave {
+  opacity: 1;
+
+  &.loading-overlay-transition-leave-active {
+    opacity: 0;
+    transition: opacity 150ms ease-in-out;
+  }
+}
+
+.global-loading-overlay {
+  height: 100vh;
+  width: 100vw;
+}
+
+.loading-overlay {
+  background-color: transparentize($body-bg, 0.2);
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: $zindex-loading-modal;
+}
+
+.loading-overlay-spinner {
+  left: 0;
+  position: absolute;
+  top: 0;
+  z-index: $zindex-loading-modal + 2;
+}
+
+.loading-overlay-text {
+  color: $gray-light;
+  font-family: $font-family-base;
+  font-size: 4em;
+  text-anchor: middle;
+}

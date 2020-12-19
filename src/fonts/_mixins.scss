@@ -1,0 +1,13 @@
+@mixin defineFont($fontRoot, $name, $family, $variant, $weight, $style) {
+  @font-face {
+    font-family: $family;
+    src:
+      url("#{$fontRoot}/#{$name}/#{$name}-#{$variant}.woff2") format("woff2"),
+      url("#{$fontRoot}/#{$name}/#{$name}-#{$variant}.woff") format("woff"),
+      url("#{$fontRoot}/#{$name}/#{$name}-#{$variant}.eot") format("embedded-opentype"),
+      url("#{$fontRoot}/#{$name}/#{$name}-#{$variant}.svg##{$name}-#{$variant}") format("svg"),
+      url("#{$fontRoot}/#{$name}/#{$name}-#{$variant}.ttf") format("truetype");
+    font-weight: $weight;
+    font-style: $style;
+  }
+}

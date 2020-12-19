@@ -1,0 +1,32 @@
+@import "settings";
+
+.progress-bar {
+  background: linear-gradient($progress-bar-bg, $progress-bar-bg) repeat-y, transparent;
+  border-radius: $progress-border-radius;
+  box-shadow: inset 0 0 0.25em $progress-bar-inset-shadow;
+  color: $progress-bar-color;
+  text-align: center;
+  text-shadow: 0 0 0.5em $gray-darker;
+  transition:
+    background-size $progress-bar-transition linear,
+    background $progress-bar-transition ease-in-out,
+    color $progress-bar-transition ease-in-out;
+
+  &.waiting {
+    color: darken($progress-bar-color, 5%);
+  }
+
+  &.running {
+    color: lighten($progress-bar-color, 10%);
+  }
+
+  &.done {
+    background: linear-gradient($progress-bar-success-bg, $progress-bar-success-bg) repeat-y, transparent;
+    color: lighten($progress-bar-color, 20%);
+  }
+
+  &.failed {
+    background: linear-gradient($progress-bar-danger-bg, $progress-bar-danger-bg) repeat-y, transparent;
+    color: lighten($progress-bar-color, 20%);
+  }
+}

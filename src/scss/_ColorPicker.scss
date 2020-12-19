@@ -1,0 +1,159 @@
+@import "settings";
+@import "mixins";
+@import "bootstrap";
+
+.colorPicker {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  width: 100%;
+  font-size: 0.8em;
+
+  @media #{$md-up} {
+    font-size: inherit;
+  }
+
+  .pickerVisualControls {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: center;
+  }
+
+  .pickerTextControls {
+    margin-left: $color-picker-base-spacing;
+    flex: 0 0 auto;
+  }
+
+  .pickerControl {
+    border: 1px solid $color-picker-border;
+    margin-bottom: $color-picker-base-spacing;
+
+    &:last-of-type {
+      margin-bottom: 0;
+    }
+  }
+
+  .saturationSelector {
+    flex: 1 0 auto;
+    position: relative;
+    height: auto;
+  }
+
+  .pickerSlider {
+    flex: 0 0 1em;
+    position: relative;
+    height: 1em;
+  }
+
+  .sliderPointer {
+    display: inline-block;
+    width: 0.5em;
+    height: 1em;
+    vertical-align: top;
+    line-height: 1em;
+    margin-left: -0.25em;
+    border: 1px solid $color-picker-border;
+    background-color: $gray-light;
+    border-radius: 0.1em;
+  }
+
+  .pickerSlider:focus {
+    outline: none;
+    border: 1px solid lighten($color-picker-border, 10%);
+
+    .sliderPointer {
+      border: 1px solid $gray-dark;
+      background-color: lighten($gray-light, 10%);
+    }
+  }
+
+  .alphaSlider {
+    position: relative;
+
+    .alphaSliderGradient {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+    }
+
+    .sliderPointerContainer {
+      position: absolute;
+      margin-top: -1px;
+      height: 100%;
+    }
+  }
+
+  .hueSlider .hue-horizontal > div:nth-last-of-type(1) {
+    margin-top: -1px;
+    margin-left: -2px;
+    margin-right: -2px;
+    display: inline-block;
+    width: 0.5em;
+    height: 1em;
+  }
+
+  .pickerTextInputs {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: $color-picker-base-spacing;
+    padding-bottom: 0;
+    font-size: 0.6em;
+
+    .pickerFormGroup {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: $color-picker-base-spacing;
+
+      &:last-of-type {
+        margin-bottom: 0;
+      }
+
+      .form-label {
+        flex: 0 0 1em;
+        width: 1em;
+        line-height: 1em;
+        padding-right: $color-picker-base-spacing;
+        margin: 0;
+      }
+
+      .form-control {
+        flex: 1 1 auto;
+        height: auto;
+        padding: ($color-picker-base-spacing / 2) $color-picker-base-spacing;
+        line-height: 1em;
+        font-size: 1em;
+        text-align: center;
+        font-family: $color-picker-input-font-family;
+      }
+    }
+
+    .hexInputGroup .form-label {
+      flex: 0 0 auto;
+      width: auto;
+    }
+
+    .pickerSubcomponents {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      width: 100%;
+    }
+
+    .pickerSubcomponentColumn {
+      display: flex;
+      flex-direction: column;
+      padding: $color-picker-base-spacing;
+      border-top: 1px solid $color-picker-border;
+
+      &:first-of-type {
+        border-right: 1px solid $color-picker-border;
+      }
+    }
+  }
+}

@@ -1,0 +1,14 @@
+[ignore]
+<PROJECT_ROOT>/\(build|coverage|doc|cache\)/.*
+<PROJECT_ROOT>/src/\(CSXS|scss|lib\)/.*
+<PROJECT_ROOT>/node_modules/.*
+<PROJECT_ROOT>/flow-typed/npm/.*
+
+[options]
+munge_underscores=true
+module.name_mapper='^.*!img/.*' -> '<PROJECT_ROOT>/src/flow/stub/img-modules.js'
+module.name_mapper='^template/.*' -> '<PROJECT_ROOT>/src/flow/stub/template-modules.js'
+module.name_mapper='^img/.*' -> '<PROJECT_ROOT>/src/flow/stub/img-modules.js'
+module.name_mapper='^fonts/.*' -> '<PROJECT_ROOT>/src/flow/stub/font-modules.js'
+module.name_mapper='^scss/.*' -> '<PROJECT_ROOT>/src/flow/stub/scss-modules.js'
+esproposal.decorators=ignore

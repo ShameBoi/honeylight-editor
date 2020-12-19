@@ -1,0 +1,79 @@
+@import "settings";
+@import "mixins";
+@import "bootstrap";
+
+.sideToolbar {
+  color: $panel-default-text;
+  background-color: $panel-bg;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 0;
+  position: relative;
+  height: 100%;
+
+  .sidebarHeader {
+    flex: 0 0 auto;
+    background-color: $panel-default-heading-bg;
+    text-align: center;
+    width: 100%;
+    height: 2.5em;
+    margin: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: $zindex-navbar;
+  }
+
+  .sidebarToolbar {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: flex-start;
+
+    .icon-toolbar-group {
+      margin: 0;
+    }
+  }
+
+  .sidebarBody {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 3em 0 0;
+
+    > * {
+      margin-bottom: $sidebar-base-spacing;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+
+    .colorPicker {
+      padding-left: $sidebar-base-spacing;
+      padding-right: $sidebar-base-spacing;
+    }
+
+    .colorState {
+      padding-left: $sidebar-base-spacing;
+      padding-right: $sidebar-base-spacing;
+      display: flex;
+      flex-flow: row nowrap;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+
+      .activeColorsDisplay {
+        margin-right: $sidebar-base-spacing;
+      }
+    }
+  }
+}

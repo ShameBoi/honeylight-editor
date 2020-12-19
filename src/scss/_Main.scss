@@ -1,0 +1,104 @@
+@import "settings";
+@import "mixins";
+@import "bootstrap";
+
+#root {
+  @include container-fixed();
+
+  position: absolute;
+  bottom: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+}
+
+.mainContainer {
+  @include make-row();
+
+  display: flex;
+  flex-direction: row;
+  width: auto;
+  height: 100%;
+
+  .sideToolbar {
+    @include make-xs-column(6);
+    @include make-sm-column(4);
+    @include make-md-column(3);
+
+    flex: 0 0 auto;
+    max-width: $screen-lg-min * (3 / 12);
+    padding: 0;
+    box-shadow: 0.1em 0 0.5em $gray-dark;
+  }
+
+  .mainContent {
+    @include make-xs-column(6);
+    @include make-sm-column(8);
+    @include make-md-column(9);
+
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 0;
+
+    .mainContentHeader {
+      flex: 0 0 auto;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      background-color: $panel-default-heading-bg;
+      text-align: center;
+      width: 100%;
+      height: 2.5em;
+      margin-bottom: $main-base-spacing;
+      color: $gray-light;
+
+      .mainContentTitleEditGroup {
+        flex: 1 1 auto;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+
+        .mainContentTitleEditButtonIcon {
+          flex: 0 0 3em;
+          width: 3em;
+          height: 100%;
+        }
+
+        .mainContentTitle {
+          flex: 0 1 auto;
+          font-size: 1.25em;
+          line-height: 1em;
+          margin-top: $main-base-spacing;
+          margin-bottom: $main-base-spacing;
+        }
+      }
+
+      .mainContentTitle.editing {
+        flex: 0 1 auto;
+        font-size: 1.25em;
+        line-height: 1em;
+        margin: 0;
+      }
+
+      .mainContentTitleInput {
+        margin: 0;
+      }
+    }
+
+    .mainContentBody {
+      flex: 1 1 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      width: 100%;
+      padding: 0 $main-base-spacing;
+    }
+  }
+}

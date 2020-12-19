@@ -1,0 +1,49 @@
+@import "settings";
+@import "mixins";
+@import "bootstrap";
+
+.colorQuickBar {
+  flex: 1 1 auto;
+  width: auto;
+  height: 100%;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  justify-content: center;
+
+  .colorQuickBarRow {
+    flex: 0 0 50%;
+    width: 100%;
+    height: 50%;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: space-evenly;
+  }
+
+  .colorQuickBarSquare {
+    flex: 0 0 1em;
+    height: 1em;
+    width: 1em;
+    cursor: pointer;
+    border-radius: 0.1em;
+    border: 1px transparent;
+    box-shadow: 0.1em 0.1em 0.3em $gray-darker;
+    transition: 0.25s box-shadow;
+
+    &:focus {
+      outline: none;
+      border: 1px dotted lighten($panel-default-border, 20%);
+    }
+
+    &.selected {
+      border: 1px solid $panel-default-border;
+    }
+
+    &:hover,
+    &.selected {
+      outline: none;
+      box-shadow: 0.05em 0.05em 0.1em $gray-darker;
+    }
+  }
+}
