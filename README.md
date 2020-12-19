@@ -1,3 +1,3 @@
 # Honeylight Editor
 
-Web-based pattern editor for Honeylight.
+Browser-based pattern editor for Honeylight.
