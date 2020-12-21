@@ -51,11 +51,11 @@ export type ButtonGroupDefinition = {
   buttons: Array<ButtonDefinition>
 };
 
-export const ButtonGroupDefaultProps = {
+export const ButtonGroupDefaultProps: $Shape<ButtonGroupDefinition> = {
   buttons: []
 };
 
-export const ButtonGroupDefinitionShape = {
+export const ButtonGroupDefinitionShape: any = {
   id: PropTypes.string.isRequired,
   buttons: PropTypes.arrayOf(PropTypes.shape(ButtonDefinitionShape)).isRequired
 };
@@ -69,7 +69,7 @@ type IconToolbarProps = {
   dropdownTriggerClassName?: string
 };
 
-export default class IconToolbar extends Component<IconToolbarProps, *> {
+export default class IconToolbar extends Component<IconToolbarProps> {
   static propTypes = {
     id: PropTypes.string.isRequired,
     buttonGroups: PropTypes.arrayOf(PropTypes.shape(ButtonGroupDefinitionShape)),
@@ -78,19 +78,13 @@ export default class IconToolbar extends Component<IconToolbarProps, *> {
     dropdownTriggerClassName: PropTypes.string
   };
 
-  static defaultProps = {
+  static defaultProps: $Shape<IconToolbarProps> = {
     dropdownTriggerId: 'toolbar-dropdown',
     noDropdown: false,
     buttonGroups: []
   };
 
-  props: IconToolbarProps;
-
-  constructor(props: IconToolbarProps, context: any) {
-    super(props, context);
-  }
-
-  getButtonGroup(group: ButtonGroupDefinition, isFirst: boolean): React$Element<ButtonGroup> {
+  getButtonGroup(group: ButtonGroupDefinition, isFirst: boolean): React$Node {
     return (
       <Fragment key={group.id}>
         {!isFirst && <div className="icon-toolbar-spacer" />}
@@ -108,7 +102,7 @@ export default class IconToolbar extends Component<IconToolbarProps, *> {
     );
   }
 
-  getButton(button: ButtonDefinition, forDropdown: boolean = false): React$Element<Button> {
+  getButton(button: ButtonDefinition, forDropdown: boolean = false): React$Node {
     return (
       <Button
         id={`${button.id}-${forDropdown ? 'dropdown-btn' : 'icon-btn'}`}
@@ -132,7 +126,7 @@ export default class IconToolbar extends Component<IconToolbarProps, *> {
     );
   }
 
-  getDropdown(withButtonGroups: Array<ButtonGroupDefinition>): ?React$Element<DropdownButton> {
+  getDropdown(withButtonGroups: Array<ButtonGroupDefinition>): ?React$Node {
     const entries = withButtonGroups
       .reduce((total, cur) => total.concat(cur.buttons), [])
       .filter((btn) => btn.iconify !== 'always')
@@ -158,7 +152,7 @@ export default class IconToolbar extends Component<IconToolbarProps, *> {
     );
   }
 
-  render(): React$Element<*> {
+  render(): React$Node {
     const buttonGroupsWithDefaults = this.props.buttonGroups
       .map((group) =>
         Object.assign({}, ButtonGroupDefaultProps, group, {

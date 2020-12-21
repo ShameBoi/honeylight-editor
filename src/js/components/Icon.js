@@ -7,17 +7,17 @@ import className from 'classnames';
 type IconProps = {
   className?: string,
   name: string,
-  iconStyle: ?('brands' | 'solid' | 'regular' | 'light' | 'duotone'),
-  fw: boolean,
-  size: ?('lg' | '2x' | '3x' | '4x' | '5x'),
-  li: boolean,
-  spin: boolean,
-  pull: ?('right' | 'left'),
-  border: boolean,
-  rotate: ?('90' | '180' | '270'),
-  flip: ?('horizontal' | 'vertical'),
-  stack: ?('1x' | '2x'),
-  inverse: boolean
+  iconStyle?: ?('brands' | 'solid' | 'regular' | 'light' | 'duotone'),
+  fw?: boolean,
+  size?: ?('lg' | '2x' | '3x' | '4x' | '5x'),
+  li?: boolean,
+  spin?: boolean,
+  pull?: ?('right' | 'left'),
+  border?: boolean,
+  rotate?: ?('90' | '180' | '270'),
+  flip?: ?('horizontal' | 'vertical'),
+  stack?: ?('1x' | '2x'),
+  inverse?: boolean
 };
 
 type IconState = {};
@@ -38,29 +38,17 @@ export default class Icon extends Component<IconProps, IconState> {
     inverse: PropTypes.bool
   };
 
-  static defaultProps = {
+  static defaultProps: $Shape<IconProps> = {
     iconStyle: 'solid',
-    size: null,
     fw: false,
     li: false,
     spin: false,
-    pull: null,
     border: false,
-    rotate: null,
-    flip: null,
-    stack: null,
     inverse: false
   };
 
-  props: IconProps;
-  state: IconState;
-
-  constructor(props: IconProps, context: any) {
-    super(props, context);
-  }
-
-  render() {
-    let stylePrefix;
+  render(): React$Node {
+    let stylePrefix: 'fab' | 'far' | 'fal' | 'fad' | 'fas';
     switch (this.props.iconStyle) {
       case 'brands':
         stylePrefix = 'fab';
@@ -81,21 +69,23 @@ export default class Icon extends Component<IconProps, IconState> {
     }
     return (
       <i
-        className={className({
-          'fa-li': this.props.li,
-          [stylePrefix]: true,
-          [`fa-${this.props.name}`]: true,
-          'fa-spin': this.props.spin,
-          [`fa-${this.props.size || ''}`]: !!this.props.size,
-          [`fa-pull-${this.props.pull || ''}`]: !!this.props.pull,
-          'fa-border': this.props.border,
-          [`fa-rotate-${this.props.rotate || ''}`]: !!this.props.rotate,
-          [`fa-flip-${this.props.flip || ''}`]: !!this.props.flip,
-          [`fa-stack-${this.props.stack || ''}`]: !!this.props.stack,
-          'fa-inverse': this.props.inverse,
-          'fa-fw': this.props.fw,
-          [this.props.className || '']: !!this.props.className
-        })}
+        className={className(
+          stylePrefix,
+          `fa-${this.props.name}`,
+          {
+            'fa-li': this.props.li,
+            'fa-spin': this.props.spin,
+            [`fa-${this.props.size || ''}`]: !!this.props.size,
+            [`fa-pull-${this.props.pull || ''}`]: !!this.props.pull,
+            'fa-border': this.props.border,
+            [`fa-rotate-${this.props.rotate || ''}`]: !!this.props.rotate,
+            [`fa-flip-${this.props.flip || ''}`]: !!this.props.flip,
+            [`fa-stack-${this.props.stack || ''}`]: !!this.props.stack,
+            'fa-inverse': this.props.inverse,
+            'fa-fw': this.props.fw
+          },
+          this.props.className
+        )}
         aria-hidden="true"
       />
     );

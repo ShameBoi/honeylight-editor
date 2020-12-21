@@ -3,6 +3,7 @@ const webpack = require('webpack');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const SriPlugin = require('webpack-subresource-integrity');
+const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 const HappyPack = require('happypack');
 const pkgJson = require('./package.json');
 const outPath = path.resolve(__dirname, 'out');
@@ -50,23 +51,9 @@ module.exports = (env, argv) => {
     options: {}
   };
 
-  let happyPackStyleLoader;
-
   if (isProd) {
-    happyPackStyleLoader = new HappyPack({
-      id: 'mainStyles',
-      loaders: ['css-loader?sourceMap=true&modules=false', 'sass-loader?sourceMap=true'],
-      threadPool: happyThreadPool
-    });
-
     cssAndSassChain = [MiniCssExtractPlugin.loader].concat(cssAndSassChain);
   } else {
-    happyPackStyleLoader = new HappyPack({
-      id: 'mainStyles',
-      loaders: [styleLoader].concat(cssAndSassChain),
-      threadPool: happyThreadPool
-    });
-
     cssAndSassChain = [styleLoader].concat(cssAndSassChain);
   }
 
@@ -81,7 +68,11 @@ module.exports = (env, argv) => {
     entry: {
       vendor: vendorDeps,
       app: appEntry,
-      fonts: ['./src/fonts/SourceSansPro.scss', './src/fonts/FontAwesome.scss'],
+      fonts: [
+        './src/fonts/SourceCodePro.scss',
+        './src/fonts/SourceSansPro.scss',
+        './src/fonts/FontAwesome.scss'
+      ],
       style: ['./src/scss/style.scss']
     },
     output: {
@@ -105,7 +96,6 @@ module.exports = (env, argv) => {
     },
     devServer: {
       inline: true,
-      historyApiFallback: true,
       hot: true,
       stats: {
         colors: true
@@ -135,16 +125,6 @@ module.exports = (env, argv) => {
             loader: 'url-loader',
             options: {
               limit: 65535,
-              name: 'img/[name].[ext]'
-            }
-          }
-        },
-        {
-          test: /\.svg$/,
-          exclude: /fonts\//,
-          use: {
-            loader: 'file-loader',
-            options: {
               name: 'img/[name].[ext]'
             }
           }
@@ -184,15 +164,36 @@ module.exports = (env, argv) => {
         }
       }),
       happyPackJSXLoader,
+      new FaviconsWebpackPlugin({
+        logo: './src/img/Honeylight-Icon-lg.png',
+        cache: true,
+        prefix: 'img',
+        publicPath: '',
+        favicons: {
+          backgroundColor: '#000',
+          theme_color: '#ffc800',
+          orientation: 'portrait',
+          icons: {
+            android: true,
+            appleIcon: true,
+            appleStartup: false,
+            coast: true,
+            favicons: true,
+            firefox: true,
+            windows: true,
+            yandex: true
+          }
+        }
+      }),
       new MiniCssExtractPlugin({
         filename: 'css/[name]-[contenthash].css'
       }),
-      /* new SriPlugin({
+      new SriPlugin({
         hashFuncNames: ['sha256'],
         enabled: isProd
-      }), */
+      }),
       new HtmlWebpackPlugin({
-        title: `Honeylight Editor`,
+        title: 'Honeylight Editor',
         inject: false,
         template: path.resolve(__dirname, 'src/templates/index.ejs'),
         xhtml: true,
@@ -210,10 +211,6 @@ module.exports = (env, argv) => {
             content: 'IE=edge,chrome=1'
           },
           viewport: 'width=device-width, initial-scale=1.0',
-          HandheldFriendly: 'True',
-          MobileOptimized: '480',
-          'apple-mobile-web-app-capable': 'yes',
-          'apple-mobile-web-app-status-bar-style': 'black',
           description: pkgJson.description,
           version: pkgJson.version
         }
