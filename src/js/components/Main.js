@@ -234,7 +234,7 @@ export default class Main extends Component<MainProps, MainState> {
     return await new Promise((resolve, reject) => {
       const fileReader = new FileReader();
       fileReader.onloadend = () => {
-        if (typeof(fileReader.result) === 'string') {
+        if (typeof fileReader.result === 'string') {
           resolve(fileReader.result);
         } else {
           reject('Invalid type!');
