@@ -45,7 +45,7 @@ export default class BitmapFile {
     this.pixelDataView.setUint8(this.dib.dataSize++, color.b);
     this.pixelDataView.setUint8(this.dib.dataSize++, color.g);
     this.pixelDataView.setUint8(this.dib.dataSize++, color.r);
-    this.pixelDataView.setUint8(this.dib.dataSize++, color.a * 255);
+    this.pixelDataView.setUint8(this.dib.dataSize++, (color.a || 0) * 255);
   }
 
   buildHeader(): void {

@@ -1,7 +1,6 @@
 // @flow
 
 import React, { Component } from 'react';
-import type { Ref } from 'react';
 import type { Color, ColorResult } from 'react-color';
 import { autobind } from 'core-decorators';
 import JSZip from 'jszip';
@@ -16,6 +15,7 @@ import Config from '../data/Config';
 import Frame from '../data/Frame';
 import MainHeader from './MainHeader';
 import ColorUtil from '../util/ColorUtil';
+import type { Ref } from '../types/Shim.type';
 
 type MainProps = {};
 
@@ -31,13 +31,9 @@ type MainState = {
 export default class Main extends Component<MainProps, MainState> {
   static propTypes = {};
 
-  static defaultProps = {};
+  static defaultProps: $Shape<MainProps> = {};
 
-  props: MainProps;
-
-  state: MainState;
-
-  fileUploadRef: Ref<HTMLInputElement>;
+  fileUploadRef: Ref<HTMLInputElement> = React.createRef<HTMLInputElement>();
 
   constructor(props: MainProps, context: any) {
     super(props, context);
@@ -49,7 +45,6 @@ export default class Main extends Component<MainProps, MainState> {
       patternName: 'Untitled Pattern',
       playing: false
     };
-    this.fileUploadRef = React.createRef();
   }
 
   get activeFrame(): Frame {
@@ -95,7 +90,7 @@ export default class Main extends Component<MainProps, MainState> {
 
     for (let curFrameIndex = 0; curFrameIndex < this.state.frames.length; ++curFrameIndex) {
       const bmpFile: BitmapFile = BitmapUtil.generateBitmap(
-        curFrameIndex,
+        curFrameIndex + 1,
         this.state.frames[curFrameIndex]
       );
 
@@ -125,7 +120,7 @@ export default class Main extends Component<MainProps, MainState> {
 
   @autobind
   onRemoveFrame(frameIndex: number) {
-    const newFrameArray = filter(this.state.frames, (val, index) => {
+    const newFrameArray = filter(this.state.frames, (val: Frame, index: number) => {
       return index !== frameIndex;
     });
     let activeFrameIndex = this.state.activeFrameIndex;
@@ -200,18 +195,22 @@ export default class Main extends Component<MainProps, MainState> {
       2
     );
 
-    const jsonBlob = new Blob([jsonFile], { type: 'application/json;charset=utf-8' });
+    const jsonBlob = new Blob([jsonFile], {
+      type: 'application/json;charset=utf-8'
+    });
     saveAs(jsonBlob, `${this.state.patternName}.json`);
   }
 
   @autobind
   onOpen() {
-    this.fileUploadRef.current.value = '';
-    this.fileUploadRef.current.click();
+    if (this.fileUploadRef.current !== null) {
+      this.fileUploadRef.current.value = '';
+      this.fileUploadRef.current.click();
+    }
   }
 
   @autobind
-  onChangeFileUpload(event: SyntheticInputEvent) {
+  onChangeFileUpload(event: SyntheticInputEvent<HTMLInputElement>) {
     event.preventDefault();
     if (!event.target.files || !event.target.files.length) {
       return;
@@ -235,7 +234,11 @@ export default class Main extends Component<MainProps, MainState> {
     return await new Promise((resolve, reject) => {
       const fileReader = new FileReader();
       fileReader.onloadend = () => {
-        resolve(fileReader.result);
+        if (typeof(fileReader.result) === 'string') {
+          resolve(fileReader.result);
+        } else {
+          reject('Invalid type!');
+        }
       };
       fileReader.onerror = reject;
       fileReader.readAsText(fileToRead);
@@ -276,7 +279,7 @@ export default class Main extends Component<MainProps, MainState> {
     }
   }
 
-  render() {
+  render(): React$Node {
     return (
       <div className="mainContainer">
         <SideToolbar

@@ -4,6 +4,7 @@ import type { Color } from 'react-color';
 import BitmapFile from '../data/BitmapFile';
 import Config from '../data/Config';
 import Frame from '../data/Frame';
+import ColorUtil from './ColorUtil';
 
 export default class BitmapUtil {
   static imageWidth: number = 95;
@@ -54,7 +55,7 @@ export default class BitmapUtil {
             pixelColIndex < BitmapUtil.pixelColsPerBlock;
             ++pixelColIndex
           ) {
-            result.addPixel(currentCell);
+            result.addPixel(ColorUtil.normalizeToRGB(currentCell));
             pixelRowPos++;
           }
         }
