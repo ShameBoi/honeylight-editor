@@ -1,6 +1,6 @@
 {
   "name": "honeylight-editor",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Honeylight pattern editor",
   "private": true,
   "scripts": {
